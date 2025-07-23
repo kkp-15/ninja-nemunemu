@@ -2,56 +2,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ねむねむストーリーテラー</title>
+  <title>ねむねむストーリー</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2LM85GJN0L');
+  </script>
   <style>
     body {
       background-color: #f0f8ff;
       font-family: "Hiragino Kaku Gothic ProN", sans-serif;
       padding: 2rem;
       text-align: center;
+      transition: background-color 1s ease;
     }
     h1 {
       font-size: 2rem;
       color: #3a3a3a;
     }
-    #story {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-      line-height: 2;
-      color: #444;
-      white-space: pre-wrap;
-    }
-    button {
+    #startBtn {
       font-size: 1rem;
       padding: 0.6rem 1.2rem;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       border: none;
       border-radius: 0.5rem;
       background-color: #a5d6a7;
       color: #fff;
       cursor: pointer;
     }
-    button:hover {
+    #startBtn:hover {
       background-color: #81c784;
+    }
+    .dark {
+      background-color: #000 !important;
+      color: #aaa;
+    }
+    #footerLinks {
+      display: none;
+      margin-top: 3rem;
+      font-size: 0.95rem;
+    }
+    #footerLinks a {
+      color: #aaa;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+    #footerLinks a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>🌙 ねむねむストーリーテラー</h1>
-  <div id="story">
-    ふわふわの猫、ミミは、今日も森を歩いていました。
-    やさしい風に目を閉じると、眠気がゆっくりとやってきます。
-    葉っぱのすきまから月の光がさしこみ、ミミはごろんと横になります。
-    「おやすみ、ミミ……」
-    森は静かに、やさしく、ミミを眠りへと誘いました。
-  </div>
-  <button onclick="readStory()">📖 ゆっくり読み上げる</button>  <script>
-    function readStory() {
-      const text = document.getElementById("story").innerText;
-      const utterance = new SpeechSynthesisUtterance(text);
+  <h1>🌙 ねむねむストーリー</h1>
+  <button id="startBtn" onclick="startStory()">📖 ゆっくり読み上げる</button>  <div id="footerLinks">
+    <a href="https://x.com/intent/tweet?text=今日もストーリーを聴いて眠ります🌙&url=https://kkp-15.github.io/" target="_blank">Xでシェアする</a>
+    <a href="https://x.com/kkp_webninja" target="_blank">@kkp_webninja</a>
+  </div>  <script>
+    const storyText = `ふわふわの猫、ミミは、今日も森を歩いていました。
+やさしい風に目を閉じると、眠気がゆっくりとやってきます。
+葉っぱのすきまから月の光がさしこみ、ミミはごろんと横になります。
+「おやすみ、ミミ……」
+森は静かに、やさしく、ミミを眠りへと誘いました。`;
+
+    function startStory() {
+      document.body.classList.add('dark');
+      document.querySelector('h1').style.display = 'none';
+      document.getElementById('startBtn').style.display = 'none';
+
+      const utterance = new SpeechSynthesisUtterance(storyText);
       utterance.lang = 'ja-JP';
       utterance.rate = 0.8;
       utterance.pitch = 1.0;
+
+      utterance.onend = () => {
+        document.getElementById('footerLinks').style.display = 'block';
+      };
+
       speechSynthesis.speak(utterance);
     }
   </script></body>
