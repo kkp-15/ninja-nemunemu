@@ -37,18 +37,22 @@
       background-color: #81c784;
     }
     .dark {
-      background-color: #000 !important;
-      color: #aaa;
+      background-color: #1a1a1a !important;
+      color: #ccc;
     }
     #footerLinks {
       display: none;
       margin-top: 3rem;
       font-size: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
     }
     #footerLinks a {
-      color: #aaa;
+      color: #ccc;
       text-decoration: none;
-      margin: 0 1rem;
+      font-size: 1rem;
     }
     #footerLinks a:hover {
       text-decoration: underline;
@@ -78,7 +82,7 @@
       utterance.pitch = 1.0;
 
       utterance.onend = () => {
-        document.getElementById('footerLinks').style.display = 'block';
+        document.getElementById('footerLinks').style.display = 'flex';
       };
 
       speechSynthesis.speak(utterance);
