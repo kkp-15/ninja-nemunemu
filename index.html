@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ねむねむストーリーテラー</title>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #3a3a3a;
+    }
+    #story {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      line-height: 2;
+      color: #444;
+      white-space: pre-wrap;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      margin-top: 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: #a5d6a7;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #81c784;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌙 ねむねむストーリーテラー</h1>
+  <div id="story">
+    ふわふわの猫、ミミは、今日も森を歩いていました。
+    やさしい風に目を閉じると、眠気がゆっくりとやってきます。
+    葉っぱのすきまから月の光がさしこみ、ミミはごろんと横になります。
+    「おやすみ、ミミ……」
+    森は静かに、やさしく、ミミを眠りへと誘いました。
+  </div>
+  <button onclick="readStory()">📖 ゆっくり読み上げる</button>  <script>
+    function readStory() {
+      const text = document.getElementById("story").innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.8;
+      utterance.pitch = 1.0;
+      speechSynthesis.speak(utterance);
+    }
+  </script></body>
+</html>
